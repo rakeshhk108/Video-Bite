@@ -1,12 +1,13 @@
 package com.rakesh.youtube_clone_backend.services;
 
 import com.rakesh.youtube_clone_backend.model.User;
-import com.rakesh.youtube_clone_backend.model.Video;
 import com.rakesh.youtube_clone_backend.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -69,5 +70,32 @@ public class UserService {
     }
 
 
+    public void subscribeUser(String userId) {
+        //Retrieve the current user and add the userId to the subscribed to users set
+        User currentUser = getCurrentUser();
+        currentUser.addToSubscribedToUserSet(userId);
+        //Retrieve the target user and add the current user to subscribers list
+        User targetUser = getUserById(userId);
+        targetUser.addToSubscribesSet(currentUser.getId());
+    }
 
+    public void unSubscribeUser(String userId) {
+        //Retrieve the current user and remove the userId to the subscribed to users set
+        User currentUser = getCurrentUser();
+        currentUser.removeToSubscribedToUserSet(userId);
+        //Retrieve the target user and remove the current user to subscribers list
+        User targetUser = getUserById(userId);
+        targetUser.removeToSubscribesSet(currentUser.getId());
+    }
+
+
+    public Set<String> userHistory(String userId) {
+        User targetUser = getUserById(userId);
+        return targetUser.getVideoHistory();
+    }
+
+    private User getUserById(String userId) {
+        return userRepo.findById(userId)
+                .orElseThrow(()-> new IllegalArgumentException("no user found with the userId: " + userId));
+    }
 }

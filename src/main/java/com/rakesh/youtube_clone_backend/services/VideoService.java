@@ -1,15 +1,17 @@
 package com.rakesh.youtube_clone_backend.services;
 
 
+import com.rakesh.youtube_clone_backend.dto.CommentDto;
 import com.rakesh.youtube_clone_backend.dto.UploadVideoResponse;
 import com.rakesh.youtube_clone_backend.dto.VideoDto;
+import com.rakesh.youtube_clone_backend.model.Comment;
 import com.rakesh.youtube_clone_backend.model.Video;
 import com.rakesh.youtube_clone_backend.repository.VideoRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.aggregation.ConditionalOperators;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +23,7 @@ public class VideoService {
     private final VideoRepository videoRepository;
 
     private final UserService userService;
+
 
     public VideoDto editVideo(VideoDto videoDto) {
         // find the video of the given id
@@ -44,7 +47,7 @@ public class VideoService {
 
     public UploadVideoResponse uploadVideo(MultipartFile multipartFile){
 
-        //use aws s3 service to save the vedio
+        //use aws s3 service to save the video
         String url = s3Service.uploadfile(multipartFile);
 
         Video video = new Video();
@@ -52,7 +55,7 @@ public class VideoService {
         // save the data of the video in database
         videoRepository.save(video);
 
-        //make a uploadVideoResponse objece
+        //make a uploadVideoResponse object
 
         return new UploadVideoResponse(url , video.getId() );
     }
@@ -183,4 +186,39 @@ public class VideoService {
         videoDto.setViewCount(savedVideo.getViewCount().get());
         return videoDto;
     }
+
+    public void addComment(String videoId, CommentDto commentDto) {
+        //get video by id
+        Video video = getVideoById(videoId);
+        Comment comment = new Comment();
+        comment.setText(commentDto.getCommentText());
+        comment.setAuthouId(commentDto.getAuthorId());
+        video.addComent(comment);
+        videoRepository.save(video);
+    }
+
+    public List<CommentDto> getAllComments(String videoId) {
+        Video video = getVideoById(videoId);
+        List<Comment> commentList = video.getCommentList();
+
+        return commentList.stream()
+                .map(this::mapToCommentDto)
+                .collect(Collectors.toList());
+
+    }
+
+    private CommentDto mapToCommentDto(Comment comment) {
+        CommentDto commentDto = new CommentDto();
+        commentDto.setCommentText(comment.getText());
+        commentDto.setAuthorId(commentDto.getAuthorId());
+
+        return commentDto;
+    }
+
+    public List<VideoDto> getAllVideos() {
+        return videoRepository.findAll().stream()
+                .map(VideoService::mapToVideoDto).toList();
+    }
+
+
 }

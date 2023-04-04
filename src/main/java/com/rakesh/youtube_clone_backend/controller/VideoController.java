@@ -1,17 +1,19 @@
 package com.rakesh.youtube_clone_backend.controller;
 
 
+import com.rakesh.youtube_clone_backend.dto.CommentDto;
 import com.rakesh.youtube_clone_backend.dto.UploadVideoResponse;
 import com.rakesh.youtube_clone_backend.dto.VideoDto;
-import com.rakesh.youtube_clone_backend.model.Video;
 import com.rakesh.youtube_clone_backend.services.VideoService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
+
 
 @CrossOrigin
 @RestController
@@ -70,4 +72,28 @@ public class VideoController {
         return vService.setDisLikeVideo(videoId);
 
     }
+
+    @PostMapping("/{videoId}/comment")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addComment(@PathVariable String videoId, @RequestBody CommentDto commentDto)
+    {
+        vService.addComment(videoId,commentDto);
+    }
+
+    @GetMapping("/getAllVideo/{videoId}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<CommentDto> getAllComments(@PathVariable String videoId){
+        return vService.getAllComments(videoId);
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<VideoDto> getAllVideos(){
+        return vService.getAllVideos();
+    }
+
+
+
+
+
 }

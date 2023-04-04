@@ -7,7 +7,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -25,8 +24,8 @@ public class User {
     private String emailAddress;
     @Indexed(unique = true)
     private String sub;
-    private Set<String> subscribedToUser;
-    private Set<String> subscribers;
+    private Set<String> subscribedToUser = ConcurrentHashMap.newKeySet();
+    private Set<String> subscribers = ConcurrentHashMap.newKeySet();
     private Set<String> videoHistory = ConcurrentHashMap.newKeySet();
     private Set<String> likedVideos  = ConcurrentHashMap.newKeySet();
     private Set<String> disLikedVideos = ConcurrentHashMap.newKeySet();
@@ -50,6 +49,24 @@ public class User {
     public void addToVideoHistory(String videoId) {
         videoHistory.add(videoId);
     }
+
+    public void addToSubscribesSet(String userId) {
+        subscribers.add(userId);
+    }
+
+    public void addToSubscribedToUserSet(String userId) {
+        subscribedToUser.add(userId);
+    }
+
+    public void removeToSubscribedToUserSet(String userId) {
+        subscribedToUser.remove(userId);
+    }
+
+    public void removeToSubscribesSet(String userId) {
+        subscribers.remove(userId);
+    }
+
+
 }
 
 
