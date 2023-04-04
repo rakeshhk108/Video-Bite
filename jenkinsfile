@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'maven'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'master', url: 'https://github.com/rakeshhk108/The_Best_Barber.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                bat 'mvn clean package'
+            }
+        }
+
+         stage('Build docker image')
+        {
+            steps{
+                script{
+                    bat 'docker build -t rdhk/thebestbarber .'
+                }
+            }
+        }
+
+        stage("push imge to dockerHub")
+        {
+            steps{
+                script{
+
+                   withCredentials([string(credentialsId: 'docker_acess_token', variable: 'DokerKey')])
+                   {
+                       "docker login -u rdhk -p ${DokerKey}"
+                   }
+                    bat 'docker push rdhk/thebestbarber'
+                }
+
+            }
+        }
+
+
+    }
+}

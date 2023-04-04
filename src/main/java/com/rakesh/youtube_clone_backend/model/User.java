@@ -4,10 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Document(value = "User")
 @Data
@@ -21,12 +23,33 @@ public class User {
     private String lastName;
     private String fullName;
     private String emailAddress;
+    @Indexed(unique = true)
+    private String sub;
     private Set<String> subscribedToUser;
     private Set<String> subscribers;
-    private List<String> videoHistory;
-    private Set<String> likedVideos;
-    private Set<String> disLikedVideos;
+    private Set<String> videoHistory = ConcurrentHashMap.newKeySet();
+    private Set<String> likedVideos  = ConcurrentHashMap.newKeySet();
+    private Set<String> disLikedVideos = ConcurrentHashMap.newKeySet();
 
+
+    public void addToLikeVideos(String videoId){
+        likedVideos.add(videoId);
+    }
+    public void removeFromLikeVideos(String videoId) {
+        likedVideos.remove(videoId);
+    }
+
+    public void addToDisLikeVideos(String videoId){
+        disLikedVideos.add(videoId);
+    }
+    public void removeFromDisLikeVideos(String videoId){
+        disLikedVideos.remove(videoId);
+    }
+
+
+    public void addToVideoHistory(String videoId) {
+        videoHistory.add(videoId);
+    }
 }
 
 
