@@ -1,7 +1,8 @@
 .main-display{
   position: absolute;
-  margin-top: 5rem;
+  margin-top: 4rem;
   margin-left: 250px;
+  padding: 6px;
   width: 100%;
   transition: margin-left 250ms ease-in;
 }
@@ -10,3 +11,4 @@
 .display-area-shrink{
   margin-left: 60px ;
 }
+

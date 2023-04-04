@@ -5,9 +5,16 @@
       <div class = "side-nav-button p-2 mg-3" (click) ="sideNavToggle()" >
         <i class="fa-solid fa-bars" style="color: #ffffff;"></i>
       </div>
-
-      <img class = "brand-image" src="../../../../assets/images/youtube-logo-png-2067.png">
-      <label>YouTube</label>
+      <a routerLink = "/home">
+        <img class = "brand-image" src="../../../../assets/images/youtube-logo-png-2067.png">
+      </a>
+      <label> 
+        <a routerLink = "/home">
+          YouTube
+        </a>
+      </label>
+     
+      
     </div>
 
     <!--    <div class="input-group">-->
@@ -18,7 +25,7 @@
     <!--    </div>-->
 
     <div class="navbar-elements">
-      <i class="fa-solid fa-plus" style="color: #ffffff;"></i>
+      <a routerLink ="/uploadVideo"><i class="fa-solid fa-plus" style="color: #ffffff;"></i></a>
       <i class="fa-sharp fa-solid fa-bell" style="color: #ffffff;"></i>
       <i *ngIf = "isAuthenticated; else noAuth" class="fa-sharp fa-solid fa-user" style="color: #ffffff;"></i>
       <ng-template #noAuth>

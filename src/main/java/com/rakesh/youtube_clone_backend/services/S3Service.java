@@ -23,6 +23,7 @@ public class S3Service implements FileService {
 
 
     public static final String BUCKET_NAME = "youtubestoragedrd";
+
     @Autowired
     AmazonS3 amazonS3;
 

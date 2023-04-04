@@ -50,4 +50,9 @@ export class VideoUploadService {
   saveVideo(videoMetaData: VideoDetails):Observable<VideoDetails> {
     return this.httpClient.put<VideoDetails>("http://localhost:8080/videos/update", videoMetaData);
   }
+
+  getAllVideos():Observable<Array<VideoDetails>>
+  {
+      return this.httpClient.get<Array<VideoDetails>>("http://localhost:8080/videos");
+  }
 }

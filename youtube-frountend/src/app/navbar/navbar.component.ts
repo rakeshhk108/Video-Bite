@@ -28,39 +28,48 @@ export class NavbarComponent implements OnInit{
   list = [
     {
       number: 1,
-      name : 'home',
-      icon : 'fa-solid fa-house'
+      name : 'Home',
+      icon : 'fa-solid fa-house',
+      link : '/home'
     },
     {
       number: 2,
-      name : 'Analytics',
-      icon : 'fa-solid fa-chart-line'
+      name : 'Subscribed',
+      icon : 'fa-solid fa-play',
+      link : '/subscribed'
+      
     },
     {
       number: 3,
-      name : 'Product',
-      icon : 'fa-solid fa-box'
+      name : 'History',
+      icon : 'fa fa-history',
+      link: '/history'
     },
     {
       number: 4,
-      name : 'Order',
-      icon : 'fa-solid fa-cart-shopping'
+      name : 'Liked Videos',
+      icon : 'fa fa-thumbs-up',
+      link : "/likedVideos"
     },
     {
       number: 5,
       name : 'Settings',
-      icon : 'fa-solid fa-gear'
-    },
-    {
-      number: 6,
-      name : 'About',
-      icon : 'fa-solid fa-circle-info'
+      icon : 'fa-solid fa-gear',
+      link : '/home'
     },
     {
       number: 7,
       name : 'Contact',
-      icon : 'fa-solid fa-phone'
+      icon : 'fa-solid fa-phone',
+      link : '/home'
+    },
+    {
+      number: 6,
+      name : 'About',
+      icon : 'fa-solid fa-circle-info',
+      link : '/home'
     }
+    
 
 
 
