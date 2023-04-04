@@ -1,0 +1,12 @@
+.main-display{
+  position: absolute;
+  margin-top: 5rem;
+  margin-left: 250px;
+  width: 100%;
+  transition: margin-left 250ms ease-in;
+}
+
+
+.display-area-shrink{
+  margin-left: 60px ;
+}

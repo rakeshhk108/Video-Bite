@@ -1,0 +1,12 @@
+.videoDetail{
+  margin-left: 25px;
+  margin-top: 25px;
+  height: 500px;
+  width: 600px;
+}
+
+.mat-title{
+  margin-top: 15px ;
+  font-size: 20px;
+  font-weight: bold;
+}

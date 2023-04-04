@@ -1,0 +1,36 @@
+
+<nav class ="navbar navbar-expand-lg navbar-dark bg-dark" >
+  <div class = "container-fluid">
+    <div class="navbar-elements">
+      <div class = "side-nav-button p-2 mg-3" (click) ="sideNavToggle()" >
+        <i class="fa-solid fa-bars" style="color: #ffffff;"></i>
+      </div>
+
+      <img class = "brand-image" src="../../../../assets/images/youtube-logo-png-2067.png">
+      <label>YouTube</label>
+    </div>
+
+    <!--    <div class="input-group">-->
+    <!--      <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">-->
+    <!--      <div class="input-group-append">-->
+    <!--        <span class="input-group-text" id="basic-addon2">@example.com</span>-->
+    <!--      </div>-->
+    <!--    </div>-->
+
+    <div class="navbar-elements">
+      <i class="fa-solid fa-plus" style="color: #ffffff;"></i>
+      <i class="fa-sharp fa-solid fa-bell" style="color: #ffffff;"></i>
+      <i *ngIf = "isAuthenticated; else noAuth" class="fa-sharp fa-solid fa-user" style="color: #ffffff;"></i>
+      <ng-template #noAuth>
+        <button mat-raised-button (click)="login()">Login</button>
+      </ng-template>
+
+    </div>
+  </div>
+
+
+</nav>
+
+
+
+

@@ -1,0 +1,7 @@
+<div class="nav-bar">
+  <app-navbar (isNavOpen) = "isNavOpen = $event"></app-navbar>
+</div>
+
+<div class = "main-display" [ngClass]="{'display-area-shrink':  !isNavOpen}" >
+  <router-outlet></router-outlet>
+</div>

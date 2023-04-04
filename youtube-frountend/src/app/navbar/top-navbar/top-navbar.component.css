@@ -1,0 +1,56 @@
+
+a {
+  text-decoration: none;
+}
+
+
+.navbar{
+  font-family: "Copperplate Gothic Bold";
+  font-size: xx-large;
+  font-weight: bolder;
+  color: #e3f2fd;
+  height: 4rem;
+}
+.nav-link
+{
+  color: #e3f2fd;
+}
+
+.side-nav-button{
+  margin-right: 20px;
+}
+
+.side-nav-button:hover{
+  background-color: rgb(255,255,255,0.3);
+  border-radius: 10px;
+}
+
+.notification-image{
+  height: 43px;
+  margin: 0 0 0 8px;
+}
+.add-image{
+  margin: 0 0 0 20px;
+  height: 25px;
+}
+
+
+.brand-image{
+  height: 35px;
+  margin-bottom: 7px;
+  margin-right: 5px;
+}
+
+.fa-bell{
+  margin: 0 30px 0 30px;
+}
+
+.side-nav-button{
+  display: inline;
+}
+
+/*.input-group{*/
+/*  width: 550px;*/
+/*}*/
+
+
