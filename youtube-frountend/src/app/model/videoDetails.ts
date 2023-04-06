@@ -6,4 +6,7 @@ export interface VideoDetails{
   videoStatus: string;
   videoUrl: string;
   tumbnail: string ;
+  likeCount: number;
+  disLikeCount : number;
+  viewCount: number;
 }

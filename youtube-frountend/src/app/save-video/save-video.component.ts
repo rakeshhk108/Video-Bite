@@ -106,7 +106,10 @@ export class SaveVideoComponent {
       "tags" : this.tags,
       "videoStatus" : this.saveVideoDetailsForm.get('videoStatus')?.value,
       "videoUrl": this.videoUrl,
-      "tumbnail" : this.thumbnaiUrl
+      "tumbnail" : this.thumbnaiUrl,
+      "likeCount": 0,
+      "disLikeCount": 0,
+      "viewCount": 0
     }
 
     this.videoService.saveVideo(videoMetaData).subscribe((response)=>{

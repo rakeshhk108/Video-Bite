@@ -8,5 +8,5 @@ import { VideoDetails } from '../model/videoDetails';
 })
 export class VideoCardComponent {
 
-  @Input() displayVideo : VideoDetails;
+  @Input() displayVideos: VideoDetails;
 }

@@ -55,4 +55,18 @@ export class VideoUploadService {
   {
       return this.httpClient.get<Array<VideoDetails>>("http://localhost:8080/videos");
   }
+
+  likeVideo(videoId: string): Observable<VideoDetails> {
+    return this.httpClient.post<VideoDetails>("http://localhost:8080/videos/" + videoId + "/like", null);
+
+  }
+
+  disLikeVideo(videoId: string): Observable<VideoDetails> {
+    return this.httpClient.post<VideoDetails>("http://localhost:8080/videos/" + videoId + "/disLike", null);
+
+  }
+
+  subscribe(userId: string):Observable<boolean> {
+      return this.httpClient.post<boolean>("http://localhost:8080/api/user/" + userId +"/subscribe", null);
+  }
 }

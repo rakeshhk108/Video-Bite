@@ -29,8 +29,11 @@ import { VideoDetailComponent } from './video-detail/video-detail.component';
 import {FlexModule} from "@angular/flex-layout";
 import { HomeComponent } from './home/home.component';
 import { VideoCardComponent } from './video-card/video-card.component';
-import { VideoHistoryComponent } from './video-history/video-history.component';
+import { VideoHistroyComponent } from './video-histroy/video-histroy.component';
 import { LikedVideosComponent } from './liked-videos/liked-videos.component';
+import {MatListModule} from "@angular/material/list";
+import {MatExpansionModule} from "@angular/material/expansion";
+import { CallBackComponent } from './call-back/call-back.component';
 
 
 @NgModule({
@@ -42,8 +45,9 @@ import { LikedVideosComponent } from './liked-videos/liked-videos.component';
     VideoDetailComponent,
     HomeComponent,
     VideoCardComponent,
-    VideoHistoryComponent,
+    VideoHistroyComponent,
     LikedVideosComponent,
+    CallBackComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,7 +70,9 @@ import { LikedVideosComponent } from './liked-videos/liked-videos.component';
     MatFormFieldModule,
     MatCardModule,
     AuthConfigModule,
-    FlexModule
+    FlexModule,
+    MatListModule,
+    MatExpansionModule,
 
   ],
   providers: [

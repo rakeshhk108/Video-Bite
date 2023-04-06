@@ -156,7 +156,7 @@ public class VideoService {
         {
             savedVideo.decrementLikes();
             userService.removeFormLikeVideo(videoId);
-            savedVideo.incrementLikes();
+            savedVideo.incrementDisLikes();
             userService.addToDisLikedVideos(videoId);
         }
         else {

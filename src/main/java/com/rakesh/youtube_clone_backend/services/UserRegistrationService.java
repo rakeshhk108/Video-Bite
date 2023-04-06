@@ -13,6 +13,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,7 +23,7 @@ public class UserRegistrationService {
    private String userInfoEndpoint;
     private final UserRepo userRepo;
 
-    public void registerUser(String token){
+    public String registerUser(String token){
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .GET()
                 .uri(URI.create(userInfoEndpoint))
@@ -42,15 +43,24 @@ public class UserRegistrationService {
            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES ,false);
            UserInfo userInfo = objectMapper.readValue(body , UserInfo.class);
 
-           User user = new User();
+           Optional<User> userBySubject = userRepo.findBySub(userInfo.getSub());
+           if (userBySubject.isPresent()){
+               return userBySubject.get().getId();
+           }else {
 
-           user.setFirstName(userInfo.getGiveName());
-           user.setLastName(userInfo.getFamilyName());
-           user.setFullName(userInfo.getName());
-           user.setEmailAddress(userInfo.getEmail());
-           user.setSub(userInfo.getSub());
+               User user = new User();
 
-           userRepo.save(user);
+               user.setFirstName(userInfo.getGiveName());
+               user.setLastName(userInfo.getFamilyName());
+               user.setFullName(userInfo.getName());
+               user.setEmailAddress(userInfo.getEmail());
+               user.setSub(userInfo.getSub());
+
+               return userRepo.save(user).getId();
+
+           }
+
+
 
        }
        catch (Exception exception)

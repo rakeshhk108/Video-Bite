@@ -1,18 +1,68 @@
-
-
-<div fxLayout = "row">
-  <div fxFlex = "65%" class="videoDetail">
-    <app-video-player *ngIf = "videoAvailable" [videoUrl]="videoUrl" ></app-video-player>
-    <div class ="mat-title">{{videoTitle}}</div>
-    <div fxLayout = "row">
-      <div fxFlex ="50%">
-        <br>
-        <div>3rd Feb 2020</div>
-        <span>{{videoDescription}}</span>
+<div fxLayout="row">
+  <div fxFlex="65%" class="video-detail">
+    <div fxLayout="column" fxLayoutGap="8px">
+      <app-video-player *ngIf="videoAvailable" [videoUrl]="videoUrl"></app-video-player>
+      <div fxLayout="row" class="videoDetailItems">
+        <div fxFlex="50%">
+          <div class="mat-title">{{videoTitle}}</div>
+          <span class="view-count">{{viewCount}} Views</span>
+          <span class="dot"></span>
+          <span class="video-upload-date"> Apr 13, 2021</span>
+        </div>
+        <div fxFlex="50%" fxLayoutAlign="end">
+          <span class="like-dislike-section">
+              <button mat-icon-button class="thumbs-up" (click)="likeVideo()">
+                <mat-icon>thumb_up_off_alt</mat-icon>
+                {{likeCount}}
+              </button>
+              <button mat-icon-button class="thumbs-down" (click)="disLikeVideo()">
+                <mat-icon>thumb_down_off_alt</mat-icon>
+                {{disLikeCount}}
+              </button>
+          </span>
+        </div>
       </div>
-      <div fxFlex ="50%"></div>
+      <mat-divider></mat-divider>
+      <mat-card-header>
+        <div class = "subscribeElements">
+          <div>
+            <mat-card-title>Programming Techie</mat-card-title>
+            <div>
+              <mat-card-subtitle class="subtitles"> 4.2K Subscribers</mat-card-subtitle>
+            </div>
+          </div>
+          <button class="subscribeButton"  mat-raised-button color="{{subscribed ? 'basic' : 'warn'}}"
+                  (click)="subscribeToUser()">{{subscribed ? 'Unsubscribe' : 'Subscribe' }}
+          </button>
+        </div>
+
+      </mat-card-header>
+
+      <mat-accordion>
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Description:
+            </mat-panel-title>
+            <mat-panel-description>
+              {{videoDescription}}
+            </mat-panel-description>
+            <mat-panel-description>
+              See More...
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>
+            <mat-chip-listbox>
+              <mat-chip-option>One fish</mat-chip-option>
+            </mat-chip-listbox >
+          </p>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+<!--      <app-comments *ngIf="videoAvailable" [videoId]="videoId"></app-comments>-->
     </div>
   </div>
-  <div fxFlex = "5%"></div>
-  <div fxFlex = "30%"></div>
+  <div fxFlex="5%"></div>
+  <div fxFlex="30%" class="suggestion-bar">
+  </div>
 </div>

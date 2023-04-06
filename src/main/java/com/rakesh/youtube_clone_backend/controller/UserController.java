@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/user")
 @RequiredArgsConstructor
@@ -19,13 +20,14 @@ public class UserController {
     private final UserRegistrationService userRegistrationService;
     private final UserService userService;
 
+    @CrossOrigin
     @GetMapping("/register")
     @ResponseStatus(HttpStatus.OK)
     public String register(Authentication auth){
         Jwt jwt = (Jwt) auth.getPrincipal();
 
-        userRegistrationService.registerUser(jwt.getTokenValue());
-        return "User Registration Successful";
+        return userRegistrationService.registerUser(jwt.getTokenValue());
+
     }
 
     @PostMapping("/{userId}/subscribe")
