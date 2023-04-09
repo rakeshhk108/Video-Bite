@@ -2,9 +2,13 @@
     max-width: 400px;
     width: 250px;
   }
-  
+
   .example-header-image {
     background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
     background-size: cover;
   }
-  
+
+  .img-thumbnail{
+    height: 200px;
+    width: 300px;
+  }

@@ -35,7 +35,7 @@ public class UserRegistrationService {
                 .build();
 
        try{
-           //first argument is send http request and the second is we want the response in the string format
+           //first argument is sent http request and the second is we want the response in the string format
            HttpResponse<String> responseString  = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
            String body = responseString.body();
 

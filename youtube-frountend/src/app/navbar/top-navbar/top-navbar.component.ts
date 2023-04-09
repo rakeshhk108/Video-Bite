@@ -10,8 +10,10 @@ export class TopNavbarComponent {
   @Output() sideNavToggled = new EventEmitter<boolean>();
   @Input("isAuthenticated") isAuthenticated : boolean;
   @Output() isLoginStatus = new EventEmitter<boolean>();
+  @Output() isLogoutStatus = new EventEmitter<boolean>();
   menuStatus = false;
-  private isLogin: boolean = false;
+  public isLogin: boolean = false;
+  public isLogout: boolean = false;
 
 
   sideNavToggle(){
@@ -22,5 +24,10 @@ export class TopNavbarComponent {
   login(){
     this.isLogin = !this.isLogin;
     this.isLoginStatus.emit(this.isLogin);
+  }
+
+  logout() {
+    this.isLogin = ! this.isLogin;
+    this.isLogoutStatus.emit(this.isLogout);
   }
 }

@@ -1,5 +1,5 @@
 <div>
-  <app-top-navbar [isAuthenticated] = "isAuthenticated" (isLoginStatus) = "login($event)"  (sideNavToggled) = "sidenavevent($event);"></app-top-navbar>
+  <app-top-navbar [isAuthenticated] = "isAuthenticated" (isLogoutStatus) ="logOff($event)" (isLoginStatus) = "login($event)"  (sideNavToggled) = "sidenavevent($event);"></app-top-navbar>
 
   <main>
     <app-side-navbar [navstatus] ="sidenavstatus" [sidenavList]="list"  [ngClass]="{'side-nav-open' : sidenavstatus}" ></app-side-navbar>

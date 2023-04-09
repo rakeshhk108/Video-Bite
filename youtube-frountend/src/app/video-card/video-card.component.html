@@ -1,10 +1,10 @@
-<mat-card class="example-card" routerLink="/video-details/{{displayVideos.id}}">
-    <img mat-card-image src="{{displayVideos.tumbnail}}"
+<mat-card class="example-card" (click)="ShowVideo()" >
+    <img class="img-thumbnail" mat-card-image src="{{displayVideos.tumbnail}}"
          alt="Video Thumbnail">
     <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
         <mat-card-title>{{displayVideos.title}}</mat-card-title>
         <mat-card-subtitle>Rakesh Das</mat-card-subtitle>
         <mat-card-subtitle>1M views</mat-card-subtitle>
-      </mat-card-header>
-  </mat-card>
+    </mat-card-header>
+</mat-card>

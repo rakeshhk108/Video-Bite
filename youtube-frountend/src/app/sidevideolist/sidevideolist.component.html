@@ -1,0 +1,16 @@
+
+<div *ngFor="let displayVideos of featuredVideos" >
+  <div (click)="videoLoad(displayVideos.id)">
+    <div class="sidelist" *ngIf="displayVideos.id !== videoId">
+      <div class="image">
+        <img class="img-thumbnail" mat-card-image src="{{ displayVideos.tumbnail != null ? displayVideos.tumbnail : errorimage }}" alt="Video Thumbnail">
+      </div>
+
+      <div class="thumbnailTitle">
+        <label class="listTitle">{{displayVideos.title}}</label>
+        <label class="listitem">{{displayVideos.viewCount }} views</label>
+        <label class="listitem">Apr 13, 2021 views</label>
+      </div>
+    </div>
+  </div>
+</div>

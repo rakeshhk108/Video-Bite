@@ -53,7 +53,7 @@ export class VideoUploadService {
 
   getAllVideos():Observable<Array<VideoDetails>>
   {
-      return this.httpClient.get<Array<VideoDetails>>("http://localhost:8080/videos");
+      return this.httpClient.get<Array<VideoDetails>>("http://localhost:8080/videos/public");
   }
 
   likeVideo(videoId: string): Observable<VideoDetails> {
@@ -68,5 +68,9 @@ export class VideoUploadService {
 
   subscribe(userId: string):Observable<boolean> {
       return this.httpClient.post<boolean>("http://localhost:8080/api/user/" + userId +"/subscribe", null);
+  }
+
+  unsubscribe(userId : string):Observable<boolean> {
+    return this.httpClient.post<boolean>("http://localhost:8080/api/user/"+ userId + "/unSubscribe", null);
   }
 }

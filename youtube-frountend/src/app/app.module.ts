@@ -33,7 +33,10 @@ import { VideoHistroyComponent } from './video-histroy/video-histroy.component';
 import { LikedVideosComponent } from './liked-videos/liked-videos.component';
 import {MatListModule} from "@angular/material/list";
 import {MatExpansionModule} from "@angular/material/expansion";
-import { CallBackComponent } from './call-back/call-back.component';
+import { SidevideolistComponent } from './sidevideolist/sidevideolist.component';
+import {MatLineModule} from "@angular/material/core";
+import { LoginRequestComponent } from './login-request/login-request.component';
+import { CommentComponent } from './comment/comment.component';
 
 
 @NgModule({
@@ -47,34 +50,37 @@ import { CallBackComponent } from './call-back/call-back.component';
     VideoCardComponent,
     VideoHistroyComponent,
     LikedVideosComponent,
-    CallBackComponent,
+    SidevideolistComponent,
+    LoginRequestComponent,
+    CommentComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    VgCoreModule,
-    VgControlsModule,
-    VgOverlayPlayModule,
-    VgBufferingModule,
-    NgxFileDropModule,
-    NavbarModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatChipsModule,
-    MatIconModule,
-    MatInputModule,
-    MatSelectModule,
-    MatSnackBarModule,
-    MatFormFieldModule,
-    MatCardModule,
-    AuthConfigModule,
-    FlexModule,
-    MatListModule,
-    MatExpansionModule,
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        VgCoreModule,
+        VgControlsModule,
+        VgOverlayPlayModule,
+        VgBufferingModule,
+        NgxFileDropModule,
+        NavbarModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatChipsModule,
+        MatIconModule,
+        MatInputModule,
+        MatSelectModule,
+        MatSnackBarModule,
+        MatFormFieldModule,
+        MatCardModule,
+        AuthConfigModule,
+        FlexModule,
+        MatListModule,
+        MatExpansionModule,
+        MatLineModule,
 
-  ],
+    ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],

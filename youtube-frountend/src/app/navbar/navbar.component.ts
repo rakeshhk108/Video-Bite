@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {OidcSecurityService} from "angular-auth-oidc-client";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-navbar',
@@ -16,7 +17,7 @@ export class NavbarComponent implements OnInit{
    @Output() isNavOpen = new EventEmitter<boolean>();
 
 
-  constructor(private oidcSecurityService: OidcSecurityService) {
+  constructor(private oidcSecurityService: OidcSecurityService, private router: Router) {
   }
 
   ngOnInit():void {
@@ -37,7 +38,7 @@ export class NavbarComponent implements OnInit{
       name : 'Subscribed',
       icon : 'fa-solid fa-play',
       link : '/subscribed'
-      
+
     },
     {
       number: 3,
@@ -69,7 +70,7 @@ export class NavbarComponent implements OnInit{
       icon : 'fa-solid fa-circle-info',
       link : '/home'
     }
-    
+
 
 
 
@@ -83,8 +84,11 @@ export class NavbarComponent implements OnInit{
     }
   }
 
-  logOff(){
+  logOff($event: boolean){
     this.oidcSecurityService.logoffAndRevokeTokens();
+    this.oidcSecurityService.logoffLocal();
+    this.router.navigateByUrl("/home")
+
   }
 
 
@@ -92,4 +96,6 @@ export class NavbarComponent implements OnInit{
     this.sidenavstatus = isSidenavOpen;
     this.isNavOpen.emit(isSidenavOpen);
   }
+
+
 }

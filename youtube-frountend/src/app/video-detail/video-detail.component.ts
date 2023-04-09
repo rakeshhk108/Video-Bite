@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {VideoUploadService} from "../Service/video-upload.service";
 import {UserService} from "../Service/user.service";
@@ -8,7 +8,7 @@ import {UserService} from "../Service/user.service";
   templateUrl: './video-detail.component.html',
   styleUrls: ['./video-detail.component.css']
 })
-export class VideoDetailComponent {
+export class VideoDetailComponent implements OnInit{
 
   videoId: string;
   videoUrl: string;
@@ -44,7 +44,17 @@ export class VideoDetailComponent {
         this.viewCount = response.viewCount;
       }
     )
+
+
+
   }
+
+
+  ngOnInit(): void {
+  }
+
+
+
 
   likeVideo() {
       this.videoService.likeVideo(this.videoId).subscribe((response) =>
@@ -68,12 +78,22 @@ export class VideoDetailComponent {
   subscribeToUser() {
       this.subscribed = !this.subscribed;
 
-      if(!this.subscribed){
+      if(this.subscribed){
           let userId = this.userService.getUserId();
+
           this.videoService.subscribe(userId).subscribe(response =>
           {
             console.log(response);
           })
+      }else
+      {
+        let userId = this.userService.getUserId();
+
+        this.videoService.unsubscribe(userId).subscribe((res)=>{
+          console.log(res);
+        })
       }
   }
+
+
 }

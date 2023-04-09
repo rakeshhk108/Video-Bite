@@ -1,6 +1,6 @@
 
 .navbar{
-  font-family: "Copperplate Gothic Bold";
+  font-family: "Copperplate Gothic Bold", serif;
   font-size: xx-large;
   font-weight: bolder;
   color: #e3f2fd;
@@ -49,8 +49,8 @@ a {
   color: inherit;
 }
 
-/*.input-group{*/
-/*  width: 550px;*/
-/*}*/
+.example-icon{
+  background-color: white;
+}
 
 

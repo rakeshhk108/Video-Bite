@@ -80,13 +80,13 @@ public class VideoController {
         vService.addComment(videoId,commentDto);
     }
 
-    @GetMapping("/getAllVideo/{videoId}")
+    @GetMapping("/{videoId}/comment")
     @ResponseStatus(HttpStatus.OK)
     public List<CommentDto> getAllComments(@PathVariable String videoId){
         return vService.getAllComments(videoId);
     }
 
-    @GetMapping
+    @GetMapping("/public")
     @ResponseStatus(HttpStatus.OK)
     public List<VideoDto> getAllVideos(){
         return vService.getAllVideos();

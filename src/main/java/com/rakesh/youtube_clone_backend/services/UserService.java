@@ -1,18 +1,25 @@
 package com.rakesh.youtube_clone_backend.services;
 
+import com.rakesh.youtube_clone_backend.dto.VideoDto;
 import com.rakesh.youtube_clone_backend.model.User;
+import com.rakesh.youtube_clone_backend.model.Video;
 import com.rakesh.youtube_clone_backend.repository.UserRepo;
+import com.rakesh.youtube_clone_backend.repository.VideoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepo userRepo;
+
+    private final VideoRepository videoRepository;
 
 
 
@@ -77,6 +84,7 @@ public class UserService {
         //Retrieve the target user and add the current user to subscribers list
         User targetUser = getUserById(userId);
         targetUser.addToSubscribesSet(currentUser.getId());
+        userRepo.save(targetUser);
     }
 
     public void unSubscribeUser(String userId) {
@@ -86,16 +94,51 @@ public class UserService {
         //Retrieve the target user and remove the current user to subscribers list
         User targetUser = getUserById(userId);
         targetUser.removeToSubscribesSet(currentUser.getId());
+        userRepo.save(targetUser);
     }
 
 
-    public Set<String> userHistory(String userId) {
+    public List<VideoDto> userHistory(String userId) {
         User targetUser = getUserById(userId);
-        return targetUser.getVideoHistory();
+
+        return targetUser.getVideoHistory()
+                .stream()
+                .map(i -> videoRepository.findById(i).get())
+                .map(UserService::mapToVideoDto)
+                .collect(Collectors.toList());
+
     }
 
     private User getUserById(String userId) {
         return userRepo.findById(userId)
                 .orElseThrow(()-> new IllegalArgumentException("no user found with the userId: " + userId));
     }
+
+    public List<VideoDto> likedVideos(String userId) {
+        User targetUser = getUserById(userId);
+
+        return targetUser.getLikedVideos()
+                .stream()
+                .map(i -> videoRepository.findById(i).get())
+                .map(UserService::mapToVideoDto)
+                .collect(Collectors.toList());
+    }
+
+
+    private static VideoDto mapToVideoDto(Video savedVideo) {
+        VideoDto videoDto = new VideoDto();
+        videoDto.setId(savedVideo.getId());
+        videoDto.setTitle(savedVideo.getTitle());
+        videoDto.setDescription(savedVideo.getDescription());
+        videoDto.setTags(savedVideo.getTags());
+        videoDto.setVideoStatus(savedVideo.getVideoStatus());
+        videoDto.setVideoUrl(savedVideo.getVideoUrl());
+        videoDto.setTumbnail(savedVideo.getTumbnail());
+        videoDto.setLikeCount(savedVideo.getLikes().get());
+        videoDto.setDisLikeCount(savedVideo.getDisLikes().get());
+        videoDto.setViewCount(savedVideo.getViewCount().get());
+        return videoDto;
+    }
+
+
 }

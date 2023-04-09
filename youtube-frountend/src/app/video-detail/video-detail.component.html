@@ -59,10 +59,13 @@
         </mat-expansion-panel>
       </mat-accordion>
 
-<!--      <app-comments *ngIf="videoAvailable" [videoId]="videoId"></app-comments>-->
+     <app-comment *ngIf="videoAvailable" [videoId] ="videoId"></app-comment>
     </div>
   </div>
   <div fxFlex="5%"></div>
   <div fxFlex="30%" class="suggestion-bar">
+    <div>
+      <app-sidevideolist [videoId] = videoId  (playVideo) = "videoId = $event"></app-sidevideolist>
+    </div>
   </div>
 </div>

@@ -1,0 +1,17 @@
+.button-container{
+    text-align: center;
+    height: 100vh;
+}
+
+.btn{
+  height: 100px;
+  width: 200px;
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.button-dis{
+  font-weight: bold;
+  font-size: large;
+  margin-top: 10px;
+}

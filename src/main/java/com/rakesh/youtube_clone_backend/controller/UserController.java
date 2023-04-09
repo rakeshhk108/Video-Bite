@@ -1,6 +1,7 @@
 package com.rakesh.youtube_clone_backend.controller;
 
 
+import com.rakesh.youtube_clone_backend.dto.VideoDto;
 import com.rakesh.youtube_clone_backend.services.UserRegistrationService;
 import com.rakesh.youtube_clone_backend.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @CrossOrigin
@@ -49,8 +51,17 @@ public class UserController {
 
     @GetMapping("/{userId}/history")
     @ResponseStatus(HttpStatus.OK)
-    public Set<String> userHistory(@PathVariable String userId)
+    public List<VideoDto> userHistory(@PathVariable String userId)
     {
         return userService.userHistory(userId);
     }
+
+    @GetMapping("/{userId}/likeVideos")
+    @ResponseStatus(HttpStatus.OK)
+    public List<VideoDto> LikedVideos(@PathVariable String userId)
+    {
+        return userService.likedVideos(userId);
+    }
+
+
 }

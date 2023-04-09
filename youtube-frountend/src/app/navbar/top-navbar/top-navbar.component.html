@@ -8,13 +8,13 @@
       <a routerLink = "/home">
         <img class = "brand-image" src="../../../../assets/images/youtube-logo-png-2067.png">
       </a>
-      <label> 
+      <label>
         <a routerLink = "/home">
           YouTube
         </a>
       </label>
-     
-      
+
+
     </div>
 
     <!--    <div class="input-group">-->
@@ -27,7 +27,11 @@
     <div class="navbar-elements">
       <a routerLink ="/uploadVideo"><i class="fa-solid fa-plus" style="color: #ffffff;"></i></a>
       <i class="fa-sharp fa-solid fa-bell" style="color: #ffffff;"></i>
-      <i *ngIf = "isAuthenticated; else noAuth" class="fa-sharp fa-solid fa-user" style="color: #ffffff;"></i>
+      <i *ngIf = "isAuthenticated; else noAuth" [matMenuTriggerFor]="menu"class="fa-sharp fa-solid fa-user" style="color: #ffffff;"></i>
+
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logout()" >Logout</button>
+      </mat-menu>
       <ng-template #noAuth>
         <button mat-raised-button (click)="login()">Login</button>
       </ng-template>

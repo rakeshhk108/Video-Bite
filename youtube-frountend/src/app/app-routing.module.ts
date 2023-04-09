@@ -6,7 +6,7 @@ import {VideoDetailComponent} from "./video-detail/video-detail.component";
 import { HomeComponent } from './home/home.component';
 import { LikedVideosComponent } from './liked-videos/liked-videos.component';
 import {VideoHistroyComponent} from "./video-histroy/video-histroy.component";
-import {CallBackComponent} from "./call-back/call-back.component";
+import {LoginRequestComponent} from "./login-request/login-request.component";
 
 
 const routes: Routes = [
@@ -17,10 +17,6 @@ const routes: Routes = [
   {
     path: "home",
     component: HomeComponent
-  },
-  {
-    path: "callback",
-    component: CallBackComponent
   },
   {
     path: "likedVideos",
@@ -41,6 +37,10 @@ const routes: Routes = [
   {
     path: 'video-details/:videoId',
     component : VideoDetailComponent
+  },
+  {
+    path: 'login-request',
+    component: LoginRequestComponent
   }
 ];
 

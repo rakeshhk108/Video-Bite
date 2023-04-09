@@ -26,6 +26,7 @@ public class SecrtityConfig{
     public SecurityFilterChain FilterChain(HttpSecurity http) throws Exception{
         http
                 .authorizeHttpRequests()
+                .requestMatchers("/videos/public**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

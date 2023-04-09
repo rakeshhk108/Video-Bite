@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {LoginResponse, OidcSecurityService} from "angular-auth-oidc-client";
+import {OidcSecurityService} from "angular-auth-oidc-client";
+import {UserService} from "./Service/user.service";
+
 
 @Component({
   selector: 'app-root',
@@ -10,17 +12,18 @@ export class AppComponent implements OnInit{
   title = 'youtube-frountend';
   isNavOpen: boolean;
 
-  constructor(public oidcSecurityService: OidcSecurityService) {
-    this.oidcSecurityService.getAccessToken().subscribe(at => {
-      console.log(at);
-    });
+  constructor(private oidcSecurityService: OidcSecurityService, private userService : UserService) {
+
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.oidcSecurityService.checkAuth()
-      .subscribe(({ isAuthenticated}) =>{
-      console.log("app is authenticated" , isAuthenticated);
-
-    });
+      .subscribe(({ isAuthenticated }) => {
+        console.log('app is authenticated', isAuthenticated);
+        if (isAuthenticated) {
+          this.userService.registerUser();
+        }
+      });
   }
+
 }
