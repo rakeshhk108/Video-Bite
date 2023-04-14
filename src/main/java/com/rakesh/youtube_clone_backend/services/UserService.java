@@ -11,17 +11,14 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
+
     private final UserRepo userRepo;
-
     private final VideoRepository videoRepository;
-
-
 
     //get the credentials of the current user
     public User getCurrentUser(){
@@ -103,11 +100,13 @@ public class UserService {
 
         return targetUser.getVideoHistory()
                 .stream()
-                .map(i -> videoRepository.findById(i).get())
+                .filter(videoId -> videoRepository.findById(videoId).isPresent()) // filter out any IDs not found in repository
+                .map(videoId -> videoRepository.findById(videoId).get())
                 .map(UserService::mapToVideoDto)
                 .collect(Collectors.toList());
-
     }
+
+
 
     private User getUserById(String userId) {
         return userRepo.findById(userId)
@@ -119,6 +118,7 @@ public class UserService {
 
         return targetUser.getLikedVideos()
                 .stream()
+                .filter(i -> videoRepository.findById(i).isPresent())
                 .map(i -> videoRepository.findById(i).get())
                 .map(UserService::mapToVideoDto)
                 .collect(Collectors.toList());

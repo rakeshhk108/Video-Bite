@@ -31,7 +31,7 @@
               <mat-card-subtitle class="subtitles"> 4.2K Subscribers</mat-card-subtitle>
             </div>
           </div>
-          <button class="subscribeButton"  mat-raised-button color="{{subscribed ? 'basic' : 'warn'}}"
+          <button class="subscribeButton"  mat-raised-button color="{{subscribed ? 'basic' : 'primary'}}"
                   (click)="subscribeToUser()">{{subscribed ? 'Unsubscribe' : 'Subscribe' }}
           </button>
         </div>
@@ -65,7 +65,7 @@
   <div fxFlex="5%"></div>
   <div fxFlex="30%" class="suggestion-bar">
     <div>
-      <app-sidevideolist [videoId] = videoId  (playVideo) = "videoId = $event"></app-sidevideolist>
+      <app-sidevideolist></app-sidevideolist>
     </div>
   </div>
 </div>

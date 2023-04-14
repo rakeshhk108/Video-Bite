@@ -22,7 +22,7 @@ export class VideoCardComponent {
     this.oidcSecurityService.checkAuth()
       .subscribe(({ isAuthenticated }) => {
         if (isAuthenticated) {
-          this.router.navigateByUrl("video-details/"+ this.displayVideos.id);
+          this.router.navigateByUrl("/vidoe-details/" + this.displayVideos.id);
         }
         else
         {

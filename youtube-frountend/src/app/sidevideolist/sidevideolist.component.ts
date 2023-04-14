@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
+import { Router } from '@angular/router';
 import {VideoDetails} from "../model/videoDetails";
 import {VideoUploadService} from "../Service/video-upload.service";
 
@@ -15,7 +16,7 @@ export class SidevideolistComponent {
 
   errorimage : string = "./assets/images/youtube-logo-png-2067.png";
 
-  constructor(private videoService : VideoUploadService) {
+  constructor(private videoService : VideoUploadService, private router: Router) {
     this.videoService.getAllVideos().subscribe((response)=>
       {
         this.featuredVideos = response;
@@ -27,7 +28,9 @@ export class SidevideolistComponent {
     );
   }
 
-  videoLoad(videoId: string) {
-    this.playVideo.emit(videoId);
+  videoLoad(videId : string) {
+    this.videoId = videId;
+  
+    this.router.navigateByUrl("/video-details/" + this.videoId);
   }
 }

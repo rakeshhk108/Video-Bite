@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {VideoUploadService} from "../Service/video-upload.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatChipInputEvent} from "@angular/material/chips";
@@ -36,7 +36,7 @@ export class SaveVideoComponent {
   videoAvailable: boolean = false;
 
 
-  constructor(private activatedRoute : ActivatedRoute, private videoService : VideoUploadService, private matSnackBar : MatSnackBar) {
+  constructor(private activatedRoute : ActivatedRoute, private videoService : VideoUploadService, private matSnackBar : MatSnackBar, private router : Router) {
     this.activatedRoute.paramMap.subscribe(params => {
       this.videoId = params.get('videoId');
     });
@@ -114,7 +114,8 @@ export class SaveVideoComponent {
 
     this.videoService.saveVideo(videoMetaData).subscribe((response)=>{
       console.log(response);
-      this.matSnackBar.open("video Metadata Update successfully","OK")
+      this.matSnackBar.open("video Metadata Update successfully","OK");
+      this.router.navigateByUrl("/home");
     })
   }
 }
