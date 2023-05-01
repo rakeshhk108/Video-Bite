@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {VideoUploadService} from "../Service/video-upload.service";
 import {UserService} from "../Service/user.service";
@@ -8,9 +8,9 @@ import {UserService} from "../Service/user.service";
   templateUrl: './video-detail.component.html',
   styleUrls: ['./video-detail.component.css']
 })
-export class VideoDetailComponent implements OnInit{
+export class VideoDetailComponent implements OnInit, OnChanges{
 
-  videoId: string;
+  @Input() videoId: string;
   videoUrl: string;
   videoTitle: string;
   videoDescription: string;
@@ -27,33 +27,44 @@ export class VideoDetailComponent implements OnInit{
 
 
   constructor(private activatedRoute : ActivatedRoute, private videoService: VideoUploadService, private userService: UserService) {
+   
+  }
+
+  ngOnInit(){
+    
     this.activatedRoute.paramMap.subscribe(params => {
       this.videoId = params.get('videoId');
+      console.log(this.videoId + "in ngOnInit");
+
+      this.getVideoData();
+
+    });
+   
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+
+    console.log(changes + "from on changes");
+
+    this.getVideoData();
+      
+
+  }
+
+
+  getVideoData() {
+    this.videoService.getVideo(this.videoId).subscribe((response) => {
+      this.videoUrl = response.videoUrl;
+      this.videoDescription = response.description;
+      this.videoTitle = response.title;
+      this.tags = response.tags;
+      this.videoAvailable = true;
+      this.likeCount = response.likeCount;
+      this.disLikeCount = response.disLikeCount;
+      this.viewCount = response.viewCount;
     });
 
-    this.videoService.getVideo(this.videoId).subscribe(
-      (response) => {
-        console.log(response);
-        this.videoUrl = response.videoUrl;
-        this.videoDescription = response.description;
-        this.videoTitle = response.title;
-        this.tags = response.tags;
-        this.videoAvailable = true;
-        this.likeCount = response.likeCount;
-        this.disLikeCount = response.disLikeCount;
-        this.viewCount = response.viewCount;
-      }
-    )
-
-
-
   }
-
-
-  ngOnInit(): void {
-  }
-
-
 
 
   likeVideo() {
